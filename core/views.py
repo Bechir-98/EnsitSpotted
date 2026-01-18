@@ -1,5 +1,12 @@
 from django.shortcuts import render, redirect
 from .forms import SpottedMessageForm
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import SpottedMessage
+from decouple import config  # <- import config
+
+# read token from .env
+N8N_TOKEN = config('N8N_TOKEN')
 
 def home(request):
     if request.method == 'POST':
@@ -11,3 +18,40 @@ def home(request):
         form = SpottedMessageForm()
 
     return render(request, 'core/home.html', {'form': form})
+
+
+@csrf_exempt
+def new_messages_for_n8n(request):
+    auth = request.headers.get("Authorization")
+
+    if auth != f"Bearer {N8N_TOKEN}":
+        return JsonResponse({"error": "Unauthorized"}, status=401)
+
+    messages = SpottedMessage.objects.filter(sent_to_n8n=False)
+
+    data = [
+        {
+            "id": msg.id,
+            "text": msg.text,
+            "created_at": msg.created_at.isoformat()
+        }
+        for msg in messages
+    ]
+
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+def mark_message_sent(request, msg_id):
+    auth = request.headers.get("Authorization")
+
+    if auth != f"Bearer {N8N_TOKEN}":
+        return JsonResponse({"error": "Unauthorized"}, status=401)
+
+    try:
+        msg = SpottedMessage.objects.get(id=msg_id)
+        msg.sent_to_n8n = True
+        msg.save()
+        return JsonResponse({"status": "ok"})
+    except SpottedMessage.DoesNotExist:
+        return JsonResponse({"error": "Not found"}, status=404)
