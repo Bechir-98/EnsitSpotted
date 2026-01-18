@@ -1,12 +1,14 @@
-document.getElementById('image').addEventListener('change', function(event) {
-    const [file] = event.target.files;
-    const preview = document.getElementById('imagePreview');
+// Handle form submission and optional animations
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
 
-    if (file) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = 'block';
-    } else {
-        preview.src = '#';
-        preview.style.display = 'none';
+    if (form) {
+        form.addEventListener('submit', () => {
+            const button = form.querySelector('button');
+            if (button) {
+                button.disabled = true;
+                button.textContent = 'Sending...';
+            }
+        });
     }
 });

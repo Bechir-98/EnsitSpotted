@@ -8,24 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <main class="wrapper">
-        <div class="container">
-            <h1>💬 Spotted</h1>
-            <p>Far8 9albek... fi sket 😏</p>
 
-            <form method="POST" id="spottedForm">
-                {% csrf_token %}
-                <label for="text">Your message:</label>
-                <textarea id="text" name="text" rows="5" placeholder="Ektib eli fi belek..." required></textarea>
-                <button type="submit">Send ✉️</button>
-            </form>
-        </div>
+<main class="wrapper">
+    <div class="container">
+        <h1>💬 Spotted</h1>
+        <p>Far8 9albek... fi sket 😏</p>
 
-        <footer>
-            <p>What's on your mind 😎</a></p>
-        </footer>
-    </main>
+        <form method="POST" id="spottedForm">
+            {% csrf_token %}
 
-    <script src="{% static 'core/js/home.js' %}"></script>
+            <label>Your message:</label>
+            {{ form.text }}
+
+            <button type="submit">Send ✉️</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>What's on your mind 😎</p>
+    </footer>
+</main>
+
+<script src="{% static 'core/js/home.js' %}"></script>
 </body>
 </html>
