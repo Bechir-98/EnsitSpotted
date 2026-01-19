@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views,new_messages_for_n8n, mark_message_sent
+from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path("api/n8n/messages/", new_messages_for_n8n),
-    path("api/n8n/messages/<int:msg_id>/sent/", mark_message_sent),
+    path('n8n/new-messages/', views.new_messages_for_n8n, name='new_messages_for_n8n'),
+    path('n8n/mark-sent/<int:message_id>/', views.mark_message_sent, name='mark_message_sent'),
 ]
+
