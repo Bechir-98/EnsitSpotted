@@ -4,20 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Spotted - Far8 9albek</title>
-    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static 'core/images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
 </head>
 <body>
 
 <main class="wrapper">
     <div class="container">
-        <h1>💬 Spotted</h1>
+        <h1>💬 Ensit Spotted</h1>
         <p>Far8 9albek... fi sket 😏</p>
 
         <form method="POST" id="spottedForm">
             {% csrf_token %}
 
-            <label>Your message:</label>
+            <label for="id_text">Your message:</label>
             {{ form.text }}
 
             <button type="submit">Send ✉️</button>
@@ -25,7 +26,7 @@
     </div>
 
     <footer>
-        <p>What's on your mind 😎</p>
+        <p>What's on your mind za3ma 😎</p>
     </footer>
 </main>
 

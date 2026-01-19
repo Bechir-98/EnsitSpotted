@@ -13,7 +13,6 @@ body {
     color: #f2eaff;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -25,16 +24,12 @@ body {
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 /* =====================
-   Container (main card)
+   Container
 ===================== */
 .container {
-    width: 100%;
     background: rgba(25, 0, 50, 0.9);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -43,7 +38,6 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     gap: 20px;
     animation: fadeIn 0.8s ease-out;
 }
@@ -57,7 +51,7 @@ body {
 }
 
 /* =====================
-   Title & Text
+   Text
 ===================== */
 h1 {
     font-size: 34px;
@@ -76,18 +70,19 @@ p {
 form {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     gap: 16px;
-    margin-top: 10px;
 }
 
-form label {
+label {
     text-align: left;
     font-size: 15px;
     font-weight: 600;
     color: #e2ccff;
 }
 
+/* =====================
+   Textarea (SMART)
+===================== */
 textarea {
     width: 100%;
     padding: 14px;
@@ -98,7 +93,9 @@ textarea {
     font-size: 15px;
     resize: none;
     transition: all 0.3s ease;
-    direction: rtl; /* supports Arabic/Tounsi */
+
+    direction: ltr;       /* default */
+    text-align: left;    /* default */
 }
 
 textarea:focus {
@@ -111,10 +108,9 @@ textarea:focus {
    Button
 ===================== */
 button {
-    width: 100%;
     padding: 14px;
     background: linear-gradient(90deg, #9d4edd, #5a189a);
-    color: white;
+    color: #fff;
     font-size: 17px;
     font-weight: 600;
     border: none;
@@ -129,6 +125,11 @@ button:hover {
     box-shadow: 0 0 15px rgba(185, 131, 255, 0.4);
 }
 
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 /* =====================
    Footer
 ===================== */
@@ -138,41 +139,15 @@ footer {
     color: #bda4f2;
 }
 
-footer a {
-    color: #d7b9ff;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease;
-}
-
-footer a:hover {
-    color: #fff;
-}
-
 /* =====================
    Responsive
 ===================== */
 @media (max-width: 600px) {
     .container {
         padding: 30px 20px;
-        gap: 15px;
     }
 
     h1 {
         font-size: 28px;
     }
-
-    p {
-        font-size: 15px;
-    }
-
-    textarea {
-        font-size: 14px;
-    }
-
-    button {
-        font-size: 16px;
-    }
-
-    
 }
